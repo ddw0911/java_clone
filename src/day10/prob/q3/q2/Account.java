@@ -19,8 +19,12 @@ public class Account {
   }
 
   void deposit(int b) {
-    balance -= b;
-    System.out.println(this.accNo + " 계좌에 " + b + " 만원이 출금되었습니다.");
+    if (balance - b <= 0) {
+      System.out.println("잔액이 부족합니다.");
+    } else {
+      balance -= b;
+      System.out.println(this.accNo + " 계좌에 " + b + " 만원이 출금되었습니다.");
+    }
   }
 
   void getAccNo() {

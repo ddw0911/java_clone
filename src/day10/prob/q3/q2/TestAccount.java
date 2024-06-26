@@ -10,5 +10,6 @@ public class TestAccount {
     acc.getBalance();
     acc.deposit(30);
     acc.getBalance();
+    acc.deposit(80);
   }
 }
