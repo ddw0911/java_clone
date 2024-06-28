@@ -3,7 +3,7 @@ package day12.inheritance.prob;
 public class Q2 {
 
   public static void main(String[] args) {
-    Student hong = new Student("홍길동", "javaprogram", 30);
+    Student hong = new Student("홍길동", "냥냥", 30);
     hong.print();
   }
 }
@@ -28,6 +28,7 @@ class Student {
       this.returnFee = (double) fee * 0.20;
     } else {
       System.out.print("그런 과정은 없습니다.");
+      System.exit(1);
     }
   }
 
