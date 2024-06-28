@@ -17,7 +17,8 @@ public class PolyMethodTest {
     display(animal);
     animal = new Cat(); // Cat 클래스 참조
     display(animal);
-    // Cat에 eat메서드가 오버라이드 되어있으므로 animal.eat이 아닌 cat.eat 메서드가 실행된다
+    // Cat에 eat메서드가 오버라이드 되어있으므로 
+    // (동적 바인딩에 의해) animal.eat이 아닌 cat.eat 메서드가 실행된다
   }
 
   public static void display(Dog dog) {
