@@ -1,8 +1,6 @@
-package assignment;
+package assignment.morningquiz0627_Q20;
 
-import java.util.Scanner;
-
-public class MorningQuiz0627_20 {
+public class BankMain {
 
   public static void main(String[] args) {
     BankApplication user = new BankApplication();
