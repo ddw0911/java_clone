@@ -1,4 +1,4 @@
-package assignment.abstract_interface.prob3.prob2;
+package assignment.abstractclass.prob3.prob2;
 
 public abstract class Content {
     private String title;

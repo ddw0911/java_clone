@@ -1,4 +1,4 @@
-package assignment.abstract_interface.prob2;
+package assignment.abstractclass.prob2;
 
 public class Rectangular extends Shape{
     private double width;

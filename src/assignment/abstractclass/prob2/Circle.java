@@ -1,4 +1,4 @@
-package assignment.abstract_interface.prob2;
+package assignment.abstractclass.prob2;
 
 public class Circle extends Shape{
     private double radius;

@@ -1,4 +1,4 @@
-package assignment.abstract_interface.prob3.prob1;
+package assignment.abstractclass.prob3.prob1;
 
 public class Tea extends Beverage {
     static int teaAmount;

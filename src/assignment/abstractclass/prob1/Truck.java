@@ -1,4 +1,4 @@
-package assignment.abstract_interface.prob1;
+package assignment.abstractclass.prob1;
 
 public class Truck extends Wheeler {
     private int truckWheel;
