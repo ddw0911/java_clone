@@ -1,6 +1,6 @@
 package assignment.interface_.Q1;
 
-public class Chicken extends Animal implements Cheatable{
+public class Chicken extends Animal implements Cheatable {
 
   Chicken() {
 
@@ -12,16 +12,11 @@ public class Chicken extends Animal implements Cheatable{
 
   @Override
   void run(int hours) {
-      this.distance = hours * speed;
-      System.out.println("닭의 이동거리=" + getDistance());
-    }
-
-  public void fly(int hours) {
-    this.distance = hours * speed * 2;
-    System.out.println("날으는 닭의 이동거리=" + getDistance());
+    this.distance = hours * speed;
   }
 
   @Override
   public void fly() {
+    this.speed *= 2;
   }
 }
