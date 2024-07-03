@@ -12,7 +12,7 @@ public class Dog extends Animal{
 
   @Override
   void run(int hours) {
-    this.distance =  speed * (double) hours / 2.0;
+    this.distance =  speed * hours / 2.0;
     System.out.println("개의 이동거리=" + getDistance());
   }
 }
