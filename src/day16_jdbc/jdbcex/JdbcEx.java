@@ -11,6 +11,11 @@ import java.util.Scanner;
 public class JdbcEx extends MemberDB {
 
   static Scanner sc = new Scanner(System.in);
+  static Connection con = null;
+  static PreparedStatement pstmt = null;
+  static Statement stmt = null;
+  static ResultSet rs = null;
+  static int result = 0;
 
   public static void main(String[] args) {
     JdbcEx ex = new JdbcEx();
@@ -32,10 +37,6 @@ public class JdbcEx extends MemberDB {
     String userName = "root";
     String password = "wkdehd09!!";
     String query = "SELECT * FROM member";
-
-    Connection con = null;
-    Statement stmt = null;
-    ResultSet rs = null;
 
     try {
       Class.forName("com.mysql.cj.jdbc.Driver");
@@ -65,10 +66,6 @@ public class JdbcEx extends MemberDB {
     String userName = "root";
     String password = "wkdehd09!!";
     String query = "INSERT INTO member VALUES(?,?,?)";
-
-    Connection con = null;
-    PreparedStatement pstmt = null; // Syntax는 캐시에 저장해놓고 데이터만 변경
-    int result = 0;
 
     try {
 //      Class.forName("com.mysql.cj.jdbc.Driver");
@@ -109,10 +106,6 @@ public class JdbcEx extends MemberDB {
     String password = "wkdehd09!!";
     String query = "INSERT INTO member VALUES(?,?,?)";
 
-    Connection con = null;
-    PreparedStatement pstmt = null; // Syntax는 캐시에 저장해놓고 데이터만 변경
-    int result = 0;
-
     try {
 //      Class.forName("com.mysql.cj.jdbc.Driver");
       con = DriverManager.getConnection(url, userName, password);
@@ -142,10 +135,6 @@ public class JdbcEx extends MemberDB {
     String password = "wkdehd09!!";
     String query = "INSERT INTO member VALUES(?,?,?)";
 
-    Connection con = null;
-    PreparedStatement pstmt = null; // Syntax는 캐시에 저장해놓고 데이터만 변경
-    int result = 0;
-
     try {
 //      Class.forName("com.mysql.cj.jdbc.Driver");
       con = DriverManager.getConnection(url, userName, password);
@@ -174,9 +163,6 @@ public class JdbcEx extends MemberDB {
     String userName = "root";
     String password = "wkdehd09!!";
 
-    Connection con = null;
-    PreparedStatement pstmt = null;
-
     try {
 //      Class.forName("com.mysql.cj.jdbc.Driver");
       con = DriverManager.getConnection(url, userName, password);
@@ -193,7 +179,8 @@ public class JdbcEx extends MemberDB {
       pstmt = con.prepareStatement(query);
       pstmt.setString(1, inputUpdate);
       pstmt.setInt(2, inputId);
-      int result = pstmt.executeUpdate();
+
+      result = pstmt.executeUpdate();
       pstmt.close();
       con.close();
       if (result == 1) {
@@ -213,9 +200,6 @@ public class JdbcEx extends MemberDB {
     String password = "wkdehd09!!";
     String query = "DELETE FROM member where id = ?";
 
-    Connection con = null;
-    PreparedStatement pstmt = null;
-
     try {
       con = DriverManager.getConnection(url, userName, password);
       System.out.print("삭제할 회원번호를 입력하세요: ");
@@ -224,8 +208,14 @@ public class JdbcEx extends MemberDB {
       pstmt = con.prepareStatement(query);
       pstmt.setInt(1, deleteId);
       pstmt.executeUpdate();
+
       pstmt.close();
       con.close();
+      if (result == 1) {
+        System.out.println("회원 정보가 삭제되었습니다.");
+      } else if (result == 0) {
+        System.out.println("회원 정보 삭제를 실패하였습니다.");
+      }
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
