@@ -8,16 +8,22 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-public class JdbcEx extends MemberDB{
+public class JdbcEx extends MemberDB {
+
+  static Scanner sc = new Scanner(System.in);
 
   public static void main(String[] args) {
-//    memberInsert(5, "qqq", "mafia");
     JdbcEx ex = new JdbcEx();
-//    ex.memberUpdate();
     memberSearch();
+//    memberInsert(4, "lll", "singer");
 //    memberInsert(new Member());
+
+    ex.memberUpdate();
+
+//    memberSearch();
 //
-//    memberDelete();
+//    ex.memberDelete();
+    memberSearch();
 
   }
 
@@ -55,7 +61,6 @@ public class JdbcEx extends MemberDB{
 
   // 인스턴스로 입력받는 메서드
   public static void memberInsert(Member member) {
-    Scanner sc = new Scanner(System.in);
     String url = "jdbc:mysql://localhost:3306/Employees";
     String userName = "root";
     String password = "wkdehd09!!";
@@ -164,39 +169,65 @@ public class JdbcEx extends MemberDB{
 
   @Override
   public void memberUpdate() {
+    Scanner sc = new Scanner(System.in);
     String url = "jdbc:mysql://localhost:3306/Employees";
     String userName = "root";
     String password = "wkdehd09!!";
-    String query = "UPDATE member SET ? = ? where ? = ?";
 
     Connection con = null;
     PreparedStatement pstmt = null;
-    int result = 0;
 
     try {
 //      Class.forName("com.mysql.cj.jdbc.Driver");
       con = DriverManager.getConnection(url, userName, password);
-      pstmt = con.prepareStatement(query);
-      pstmt.setString(1, "job");
-      pstmt.setString(2, "citizen");
-      pstmt.setString(3, "id");
-      pstmt.setInt(4, 5);
 
-      result = pstmt.executeUpdate();
-      if (result == 1) {
-        System.out.println("회원 정보가 갱신되었습니다.");
-      } else if (result == 0) {
-        System.out.println("회원 정보 갱신이 실패하였습니다.");
-      }
+      System.out.print("수정하실 회원번호를 입력해주세요 : ");
+      int inputId = sc.nextInt();
+      sc.nextLine();
+      System.out.print("어떤 정보를 수정하시겠습니까? (name, job) : ");
+      String inputAttribute = sc.nextLine();
+      System.out.print("어떻게 수정하시겠습니까? : ");
+      String inputUpdate = sc.nextLine();
+      String query =
+          "UPDATE member SET "+ inputAttribute + " = ? where id = ?"; // ? place holder는 value에만 사용한다
+      pstmt = con.prepareStatement(query);
+      pstmt.setString(1, inputUpdate);
+      pstmt.setInt(2, inputId);
+      int result = pstmt.executeUpdate();
       pstmt.close();
       con.close();
+      if (result == 1) {
+        System.out.println("회원 정보가 수정되었습니다.");
+      } else if (result == 0) {
+        System.out.println("회원 정보 수정이 실패하였습니다.");
+      }
     } catch (SQLException e) {
-      throw new RuntimeException(e);
+      System.err.println(e.getMessage());
     }
   }
 
   @Override
   public void memberDelete() {
+    String url = "jdbc:mysql://localhost:3306/Employees";
+    String userName = "root";
+    String password = "wkdehd09!!";
+    String query = "DELETE FROM member where id = ?";
 
+    Connection con = null;
+    PreparedStatement pstmt = null;
+
+    try {
+      con = DriverManager.getConnection(url, userName, password);
+      System.out.print("삭제할 회원번호를 입력하세요: ");
+      int deleteId = sc.nextInt();
+      sc.nextLine();
+      pstmt = con.prepareStatement(query);
+      pstmt.setInt(1, deleteId);
+      pstmt.executeUpdate();
+      pstmt.close();
+      con.close();
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
   }
 }
