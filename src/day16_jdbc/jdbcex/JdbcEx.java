@@ -19,15 +19,20 @@ public class JdbcEx extends MemberDB {
 
   public static void main(String[] args) {
     JdbcEx ex = new JdbcEx();
+    //전체조회
     memberSearch();
+
+    //삽입
 //    memberInsert(4, "lll", "singer");
 //    memberInsert(new Member());
 
+    //수정
     ex.memberUpdate();
 
-//    memberSearch();
-//
+    //삭제
 //    ex.memberDelete();
+
+    //결과조회
     memberSearch();
 
   }
